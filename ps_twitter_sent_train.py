@@ -235,7 +235,7 @@ def main(sc,sqlContext,sid):
 	print("F1 Score = %s" % f1Score)
 
 	# Statistics by class
-	labels = test_hashed.map(lambda lp: lp.label).distinct().collect()
+	labels = valid_labelpoint.map(lambda lp: lp.label).distinct().collect()
 
 	for label in sorted(labels):
     		print("Class %s precision = %s" % (label, metrics.precision(label)))
@@ -250,7 +250,7 @@ def main(sc,sqlContext,sid):
 	print("Weighted false positive rate = %s" % metrics.weightedFalsePositiveRate)
 
 	# Saving the model
-	model.save(sc,'NB_SentimentModel')
+	modelNB.save(sc,'NB_SentimentModel')
 
 ## Main functionality
 if __name__ == "__main__":
